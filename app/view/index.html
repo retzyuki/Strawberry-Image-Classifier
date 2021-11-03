@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="../static/css/style.css" media="screen,projection" />
+    <link rel='icon' type='image/x-icon' href='../static/favicon.ico' />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strawberry Classifier</title>
+</head>
+
+<body>
+    <div class="navbar-fixed">
+        <nav class="light-green lighten-1" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">🍓
+                    <span class="hide-on-small-only">Strawberry Classifier</span>
+                </a>
+                <ul class="right">
+                    <li><a onclick='showPicker()'>Select Image</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <main style="min-height: 100vh;">
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <br><br><br><br>
+                <h1 class="header center pink-text">Strawberry Classifier</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">Upload images of Strawberry</h5>
+                </div>
+                <div class="row center">
+                    <input id='file-input' class='hide' type='file' name='file' accept='image/*'
+                        onchange='showPicked(this)'>
+                    <button class="btn-large waves-effect waves-light pink" onclick='showPicker()'>Select
+                        Image</button>
+                </div>
+                <br><br>
+            </div>
+        </div>
+
+        <div class="container">
+            <!--   Image  -->
+            <div class="section">
+                <div class="row">
+                    <div class="col s12 m10 offset-m1">
+                        <div id="card" class="card hide">
+                            <div class="card-image">
+                                <img id='image-picked' class="responsive-img">
+                                <span id="upload-label" class="card-title white-text flow-text truncate black col s12"
+                                    style="opacity: 25%;padding: 10px">Image
+                                    Title</span>
+                            </div>
+                            <!-- Analyze -->
+                            <div class="card-action center">
+                                <button id="analyze-button" class="col s12 btn-small waves-effect waves-light purple"
+                                    onclick='analyze()'>Analyze
+                                    🔍</button>
+                            </div>
+                            <!--   Results  -->
+                            <div id="recommendations" class="hide">
+                                <div class="card-content">
+                                    <h5 class="center flow-text">✨Results & Recommendations✨</h5>
+                                </div>
+                                <div class="card-tabs">
+                                    <ul id="tabs" class="tabs tabs-fixed-width">
+                                        <li class="tab hoverable"><a class="active" href="#statistics">📈statistics</a>
+                                        </li>
+                                        <li class="tab hoverable"><a href="#customers">🛒customers</a></li>
+                                        <li class="tab hoverable"><a href="#vendors">🏪vendors</a></li>
+                                        <li class="tab hoverable"><a href="#farmers">👨‍🌾farmers</a></li>
+                                        <li class="tab hoverable"><a href="#agricultural">🌾agricultural sect.</a></li>
+                                    </ul>
+                                </div>
+                                <div class="card-content grey lighten-4">
+                                    <div id="statistics">
+                                        <h5>The Predicted Classification of the Given Image is
+                                            <h4 id="result">result</h4>
+                                        </h5>
+                                        <br>
+                                        <div id="result2">result2</div>
+                                    </div>
+                                    <div id="customers">customers</div>
+                                    <div id="vendors">vendors</div>
+                                    <div id="farmers">farmers</div>
+                                    <div id="agricultural">agricultural</div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- About -->
+                        <br><br>
+                        <div class="about">
+                            <div class="row center">
+                                <div class="about-title">About the System:</div>
+                            </div>
+                            <div class="about-p">
+                                <p>The purpose of the system is to classify the image of a strawberry submitted by the
+                                    user into three different classes,
+                                    The classes are : Class 1, Class 2 and Extra Class. The strawberry will be
+                                    classified based on its appearance such as if there is deformity in shape,
+                                    white patches, pressure marks, dry bruising and traces of soil. The classification
+                                    of strawberries does not include type of shapes(Oblate, Globose, Conic etc.),
+                                    Ripeness of the strawberry, Diseases, Spoilage etc. and would only use the features
+                                    given only as the basis for the classification of the strawberry.
+                                    <br><br>
+                                    The system also doesn't use any real-time machine learning unlike other existing
+                                    image classification softwares, instead it only uses 2D Image files.
+                                    The system also doesn't use and produce 3D model images, the images use for training
+                                    the data are images captured using a camera and was manually classified
+                                    by the researchers. Only 800+ Images are only used in training the model which the
+                                    model only yields an accuracy of 82% on classifying. This means that not all
+                                    classifications given by the system is a 100% correct but the prediction is likely
+                                    correct compared to other
+                                    classification methods. It is also required for the user to upload strawberry
+                                    images, If the user were to upload images
+                                    other than strawberries
+                                    or strawberry images from the internet, The system would classify them as "Extra
+                                    Class" since it is the default
+                                    classification and that there is no "Other Class" classification trained
+                                    In the model of the system.
+                                </p>
+                            </div>
+                            <img width="100%" src="../static/strawberry-1.png" alt="Strawberry-Image-1">
+                            <p class="about-p">Image shows existing white patch and pest damage on strawberries.</p>
+                            <br><br>
+                            <img width="100%" src="../static/strawberry-2.png" alt="Strawberry-Image-2">
+                            <p class="about-p">
+                                Image shows overmature/overripe, deformed and more than 20% white patch on strawberries.
+                            </p>
+                            <p class="about-p">Source:
+                                <a
+                                    href="http://www.bafs.da.gov.ph/bafs_admin/admin_page/pns_file/2021-02-24-PNS%20BAFS%20125-2014%20Strawberry.pdf">
+                                    PNS:Fresh fruits- Strawberry Classification and Grading.
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </main>
+    <footer id="footer" class="page-footer deep-purple">
+        <div class="footer-copyright">
+            <div class="container center">
+                By : John Marli Q. Baltazar, Raymond Rafael S. Osmena, Marc Christian C. Patacsil</a>
+            </div>
+        </div>
+    </footer>
+    <!--JavaScript at end of body for optimized loading-->
+    <script type="text/javascript" src="../static/js/materialize.min.js"></script>
+    <script src='../static/js/script.js'></script>
+    <script>
+        const tabs = document.getElementById('tabs');
+        const instance = M.Tabs.init(tabs);
+    </script>
+</body>
+
+</html>
